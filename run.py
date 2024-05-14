@@ -1,4 +1,6 @@
 import os
+import time
+import random
 
 # our card symbols
 heart = '\u2665'
@@ -59,12 +61,18 @@ def initialize_board(size = 4):
 
 board = initialize_board()
 
-def draw_board(board, pick1 = None, pick2 = None):
+def draw_board(board, player, pick1 = None, pick2 = None):
     """
     Draw the board depending on game state
     with either one, two or no card revealed
     """
     clear_terminal()
+    if (player.name != 'Computer'):
+        print(f"+++ It's your turn, {player.name}!")
+        print(f"--- Current score: {player.score}")
+    else: 
+        print("Computer's turn!")
+        print(f"Current score: {player.score}")
     print('\n' + '-' * 30 )
     print(' '* 5 + 'A' + ' ' * 5 + 'B' + ' ' * 5 + 'C' + ' ' * 5 + 'D')
     for x in range(len(board)):
@@ -78,6 +86,7 @@ def draw_board(board, pick1 = None, pick2 = None):
             else: print(joker, end = '    ')
     print('\n' + '-' * 30 )
     print('\n')
+    
     
 
 def validate_input(pick):
@@ -102,16 +111,12 @@ def player_turn(player):
     """
     Facilitates a whole turn of the active player
     """
-    # while True:
-    #     if card1:
-    #         if card2:
-    #     else
-    #         card1 = pick_card()        
-    #         card2 = pick_card
-    pass
+    print(f" +++ {player.name} it's your turn! +++")
+    pick_cards(player)
+    check_pair()
 
 
-def pick_card(player):
+def pick_cards(player):
     """
     User Input for choosing a card on the board
     calls validate_input for input validation ;)
@@ -120,6 +125,32 @@ def pick_card(player):
     
 
     while True:
+        if player.name == 'Computer':
+            x1 = random.choice(row_labels)
+            x2 = random.choice(row_labels)
+            y1 = random.randint(0, 3)
+            y2 = random.randint(0, 3)
+            player.pick1 = [x1,y1]
+            player.pick2 = [x2,y2]
+            print('The Computer is thinking.')
+            print('.', end = '', flush = True)
+            time.sleep(0.2)
+            print('.', end = '', flush = True)
+            time.sleep(0.2)
+            print(f'The Computers first pick is: {player.pick1[0]}{player.pick1[1]}')
+            time.sleep(2)
+            card1 = [ord(player.pick1[0]) - 65, player.pick1[1]]
+            draw_board(board, player, card1)
+            print('The Computer is thinking.')
+            print('.', end = '', flush = True)
+            time.sleep(0.2)
+            print('.', end = '', flush = True)
+            time.sleep(0.2)
+            print(f'The Computers second pick is: {player.pick2[0]}{player.pick2[1]}')
+            time.sleep(1)
+            card2 = [ord(player.pick2[0]) - 65, player.pick2[1]]
+            draw_board(board, player, card1, card2)
+            break
         if player.pick1 == []:
             print('+++ Please pick your FIRST card! Example: A1 +++')
             
@@ -131,7 +162,7 @@ def pick_card(player):
                 # draw_board(board, player.pick1)
                 print(f'You chose: {player.pick1[0]}{player.pick1[1]}')
                 card1 = [ord(player.pick1[0]) - 65, player.pick1[1]]
-                draw_board(board, card1)
+                draw_board(board, player, card1)
         elif player.pick2 == []:
             print('+++ Please pick your SECOND card! Example: A1 +++')
             
@@ -141,20 +172,22 @@ def pick_card(player):
             if validate_input(pick_strip):
                 player.pick2 = [pick_strip[0].upper(),int(pick_strip[1])]
                 if player.pick2 == player.pick1:
-                    print('+++ You cannot chose the same card twice! +++')
+                    print('+++ You cannot choose the same card twice! +++')
                     player.pick2 = []
                     continue
                 print(f'You chose: {player.pick2[0]}{player.pick2[1]}')
                 card2 = [ord(player.pick2[0]) - 65, player.pick2[1]]
-                draw_board(board, card1, card2)
+                draw_board(board, player, card1, card2)
                 break
-    return
+    return card1, card2
 
-def check_pair(card1, card2):
-    if card1 == card2:
+def check_pair(cards):
+    if board[cards[0][1]][cards[0][0]] == board[cards[1][1]][cards[1][0]]:
         print('+++ You got a pair!! +++')
         return True
-    else: return False
+    else:
+        print('no pair, sorry')
+        return False
 
 def remove_pair(card1, card2):
     pass
@@ -168,26 +201,30 @@ def display_final_score():
 
 def main():
     
-    print('-' * 40)
-    username = input('Please tell me your name: \n')
-    print(f'\nHello {username}! \u2665 Welcome to this little memory game.')
+    clear_terminal()
+    print('.' * 10 + 'MEMORY GAME' + '.' * 10)
+    print(f'\nWelcome to this little memory game.')
+    username = input('Please tell me your name: ')
+    clear_terminal()
+    player1 = player(username)
+    player2 = player('Computer')
+    player2.active = False
+    
+    print(f'\nHello {username}! \u2665 you get the first turn', end = '', flush = True)
+    time.sleep(0.7)
+    print('.', end = '', flush = True)
+    time.sleep(0.7)
+   
+    
+    
+    
+    draw_board(board, player1)
     print('-' * 40 + '\n')
     
-    player1 = player(username)
-    player2 = player('computer')
-    player2.active = False
-    active_player = player1
     
-    card1 = None
-    card2 = None
-
+    cards = pick_cards(player1)
+    check_pair(cards)
     
     
-    
-    
-    yes = pick_card(active_player)
-    
-    
-
 
 main()
