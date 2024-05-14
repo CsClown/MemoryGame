@@ -13,6 +13,28 @@ joker = '\U0001F0CF'
 
 row_labels = ['A','B','C','D']
 
+class player:
+    def __init__(self, name):
+        self.name = name
+        self.score = 0
+        self.pairs = []
+
+    def add_score(self):
+        self.score += 1
+
+    def get_score(self):
+        return self.score
+    
+    def get_pairs(self):
+        return self.pairs
+
+    def add_pair(self, pair):
+        self.pairs.append(pair)
+
+# class pick:
+#     def __init__(self, card1, card2)
+
+
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -63,6 +85,18 @@ def validate_input(pick):
         print(f'Invalid data: {e}, please try again\n')
         return False
     else: return True
+def player_turn(player):
+    """
+    Facilitates a whole turn of the active player
+    """
+    while True:
+        if card1:
+            if card2:
+        else
+            card1 = pick_card()        
+            card2 = pick_card
+
+
 
 def pick_card(player):
     """
@@ -84,9 +118,12 @@ def pick_card(player):
     return pick_strip
 
 def check_pair(card1, card2):
-    pass
+    if card1 == card2:
+        print('+++ You got a pair!! +++')
+        return True
+    else: return False
 
-def remove_pair(pick):
+def remove_pair(card1, card2):
     pass
 
 
@@ -104,9 +141,12 @@ def main():
     
     print('-' * 40 + '\n')
 
+
+    player1 = player(username)
+    player2 = player('computer')
+
     active_player = 'user'
-    user_pairs = []
-    computer_pairs = []
+    
     card1 = None
     card2 = None
 
