@@ -13,7 +13,9 @@ soccer_ball = '\u26bd'
 basketball = '\U0001F3C0'
 joker = '\U0001F0CF'
 
-row_labels = ['A','B','C','D']
+col_labels = ['A','B','C','D']
+row_labels = ['0', '1', '2', '3']
+
 
 
 class player:
@@ -37,17 +39,15 @@ class player:
     def add_pair(self, pair):
         self.pairs.append(pair)
 
-# class pick:
-#     def __init__(self, card1, card2)
+player1 = player('user')
+player2 = player('Computer')
+player2.active = False
 
-# class game_board:
-#     def __init__(self, size)
-#         self.size = size
-#         self.board = []
-
-#     def ini
 
 def clear_terminal():
+    """
+    Clears terminal for anti-cheat and overall clarity
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def initialize_board(size = 4):
@@ -70,6 +70,8 @@ def draw_board(board, player, pick1 = None, pick2 = None):
     if (player.name != 'Computer'):
         print(f"+++ It's your turn, {player.name}!")
         print(f"--- Current score: {player.score}")
+        if player.pairs : 
+            print(player.pairs)
     else: 
         print("Computer's turn!")
         print(f"Current score: {player.score}")
@@ -79,7 +81,9 @@ def draw_board(board, player, pick1 = None, pick2 = None):
         print(f'\n\n{x}    ', end = '')
         
         for y in range(len(board[0])):
-            if pick1 and pick1 == [y,x]:
+            if board[x][y] == '0':
+                print('  ', end = '    ')
+            elif pick1 and pick1 == [y,x]:
                 print(board[x][y], end = '    ')
             elif pick2 and pick2 == [y,x]:
                 print(board[x][y], end = '    ')
@@ -98,22 +102,59 @@ def validate_input(pick):
             raise ValueError(
                 f'Exactly 2 values required, you provided {len(pick)}'
             )
-        elif pick[0].upper() not in row_labels:
+        elif pick[0].upper() not in col_labels:
             raise ValueError(
                 f'Please pick a letter A - D, you provided "{pick[0].upper()}"'
+            )
+        elif pick[1] not in row_labels:
+            raise ValueError(
+                f'Please pick a number 0-3, you provided "{pick[1]}"'
+            )
+        elif board[ord(pick[0].upper()) - 65][int(pick[1])] == '0':
+            raise ValueError(
+                f'Field {pick} is empty '
             )
     except ValueError as e:
         print('*' * 40)
         print(f'Invalid data: {e}, please try again\n')
+        print('*' * 40)
         return False
     else: return True
+
+
+
 def player_turn(player):
     """
     Facilitates a whole turn of the active player
     """
-    print(f" +++ {player.name} it's your turn! +++")
-    pick_cards(player)
-    check_pair()
+
+    if player.pairs != []:
+        for i in range(len(player.pairs)):
+            print(f"Your stash: {player.pairs[i]}", end = ' ')
+    cards = pick_cards(player)
+    if check_pair(cards):
+        symbol = board[cards[0][1]][cards[0][0]]
+        player.add_score()
+        player.add_pair(symbol)
+        remove_pair(symbol)
+        print('+++ You got a pair!! +++')
+        print(f"+++ {symbol}{symbol} +++")
+        print('You get another turn!')
+    else: 
+        player.active = False
+        if player.name == "Computer":
+            player1.active = True
+        else: player2.active = True
+        clear_terminal()
+        print('sorry no pair. its your opponents turn now', flush = True)
+        time.sleep(1)
+    player.pick1 = []
+    player.pick2 = []
+
+    enter = input('Press "ENTER" to continue..')
+    if enter == '':
+        pass
+    else: print('Invalid input. Please press "Enter" to continue.')
 
 
 def pick_cards(player):
@@ -126,13 +167,13 @@ def pick_cards(player):
 
     while True:
         if player.name == 'Computer':
-            x1 = random.choice(row_labels)
-            x2 = random.choice(row_labels)
+            x1 = random.choice(col_labels)
+            x2 = random.choice(col_labels)
             y1 = random.randint(0, 3)
             y2 = random.randint(0, 3)
             player.pick1 = [x1,y1]
             player.pick2 = [x2,y2]
-            print('The Computer is thinking.')
+            print('The Computer is thinking..')
             print('.', end = '', flush = True)
             time.sleep(0.2)
             print('.', end = '', flush = True)
@@ -141,7 +182,7 @@ def pick_cards(player):
             time.sleep(2)
             card1 = [ord(player.pick1[0]) - 65, player.pick1[1]]
             draw_board(board, player, card1)
-            print('The Computer is thinking.')
+            print('The Computer is thinking..')
             print('.', end = '', flush = True)
             time.sleep(0.2)
             print('.', end = '', flush = True)
@@ -152,8 +193,7 @@ def pick_cards(player):
             draw_board(board, player, card1, card2)
             break
         if player.pick1 == []:
-            print('+++ Please pick your FIRST card! Example: A1 +++')
-            
+            print('+++ Please pick your FIRST card! Example: A1 +++') 
             pick_str = input('+++ YOUR PICK: ')
             pick_strip = [i.strip() for i in pick_str]
             pick_ls = [string for string in pick_strip]
@@ -164,8 +204,7 @@ def pick_cards(player):
                 card1 = [ord(player.pick1[0]) - 65, player.pick1[1]]
                 draw_board(board, player, card1)
         elif player.pick2 == []:
-            print('+++ Please pick your SECOND card! Example: A1 +++')
-            
+            print('+++ Please pick your SECOND card! Example: A1 +++') 
             pick_str = input('+++ YOUR PICK: ')
             pick_strip = [i.strip() for i in pick_str]
             pick_ls = [string for string in pick_strip]
@@ -183,14 +222,18 @@ def pick_cards(player):
 
 def check_pair(cards):
     if board[cards[0][1]][cards[0][0]] == board[cards[1][1]][cards[1][0]]:
-        print('+++ You got a pair!! +++')
         return True
     else:
         print('no pair, sorry')
         return False
 
-def remove_pair(card1, card2):
-    pass
+def remove_pair(symbol):
+    for x in range(len(board)):
+        for y in range(len(board[x])):
+            if board[x][y] == symbol:
+                board[x][y] = '0'
+    
+    
 
 
 def display_scores():
@@ -207,23 +250,25 @@ def main():
     username = input('Please tell me your name: ')
     clear_terminal()
     player1 = player(username)
-    player2 = player('Computer')
-    player2.active = False
+    
     
     print(f'\nHello {username}! \u2665 you get the first turn', end = '', flush = True)
     time.sleep(0.7)
     print('.', end = '', flush = True)
     time.sleep(0.7)
-   
     
     
     
-    draw_board(board, player1)
-    print('-' * 40 + '\n')
+    while True:
+        if player1.score + player2.score == 8:
+            break
+        else: 
+            active_player = player1 if player1.active else player2
+            draw_board(board, active_player)
+            player_turn(active_player)
+            
+        
     
-    
-    cards = pick_cards(player1)
-    check_pair(cards)
     
     
 
