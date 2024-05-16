@@ -74,6 +74,7 @@ def draw_board(board, player, pick1 = None, pick2 = None):
             print('Your stash:', end = " ") 
             for i in range(len(player.pairs)):
                 print(player.pairs[i], end = " ")
+                print(player.pairs[i], end = " ")
             print('\n')
     else: 
         print("Computer's turn!")
@@ -144,7 +145,15 @@ def player_turn(player):
         remove_pair(symbol)
         print('+++ You got a pair!! +++')
         print(f"+++ {symbol}{symbol} +++")
-        print('You get another turn!')
+        if player1.score + player2.score < 8:
+            print('You get another turn!')
+        else:
+            print("That was the last two cards! let's check the scores", end= " ")
+            print('.', end = '', flush = True)
+            time.sleep(0.2)
+            print('.', end = '', flush = True)
+            time.sleep(0.2)
+
     else: 
         player.active = False
         if player.name == "Computer":
@@ -252,8 +261,51 @@ def remove_pair(symbol):
 def display_scores():
     pass
 
-def display_final_score():
-    pass
+def end_of_game():
+    if player1.score + player2.score == 8:
+        clear_terminal()
+        print('\n')
+        print('+++ Game over +++')
+        print('\n')
+        if player1.score > player2.score: 
+            print(f"Congratulations, {player1.name}! \n You won with {player1.score} points")
+            print(f"Your pairs: ")
+            for i in range(len(player1.pairs)):
+                print(player1.pairs[i], end = " ")
+                print(player1.pairs[i], end = " ")
+            print('\n')
+            print(f"The computers pairs: ")
+            for i in range(len(player2.pairs)):
+                print(player2.pairs[i], end = " ")
+                print(player2.pairs[i], end = " ")
+
+        elif player1.score == player2.score:
+            print(f"Well it's a draw!")
+            print(f"Your pairs: ")
+            for i in range(len(player1.pairs)):
+                print(player1.pairs[i], end = " ")
+                print(player1.pairs[i], end = " ")
+            print('\n')
+            print(f"The computers pairs: ")
+            for i in range(len(player2.pairs)):
+                print(player2.pairs[i], end = " ")
+                print(player2.pairs[i], end = " ")
+        else:
+            print(f'The Computer has beaten you with {player2.score} to {player1.score} points')
+            print(f"The computers pairs: ")
+            for i in range(len(player2.pairs)):
+                print(player2.pairs[i], end = " ")
+                print(player2.pairs[i], end = " ")
+            print(f"Your pairs: ")
+            for i in range(len(player1.pairs)):
+                print(player1.pairs[i], end = " ")
+                print(player1.pairs[i], end = " ")
+            print('\n')
+        print('+' * 40)
+        print('\n')
+
+        return True
+    else: return False
 
 def main():
     
@@ -276,14 +328,11 @@ def main():
     
     
     
-    while True:
-        if player1.score + player2.score == 8:
-            break
-        else: 
-            active_player = player1 if player1.active else player2
-            draw_board(board, active_player)
-            player_turn(active_player)
-            
+    while not end_of_game():
+        active_player = player1 if player1.active else player2
+        draw_board(board, active_player)
+        player_turn(active_player)
+        
         
     
     
