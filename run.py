@@ -3,15 +3,35 @@ import time
 import random
 
 # our card symbols
-heart = '\u2665'
-star = '\u2605'
-music = '\u266b'
-sun = '\u2600'
-cloud = '\u2601'
-umbrella = '\u2602'
-soccer_ball = '\u26bd'
-basketball = '\U0001F3C0'
+# heart = '\u2665'
+# star = '\u2605'
+# music = '\u266b'
+# sun = '\u2600'
+# cloud = '\u2601'
+# umbrella = '\u2602'
+# soccer_ball = '\u26bd'
+# basketball = '\U0001F3C0'
+
 joker = '\U0001F0CF'
+watermelon = '\U0001f349'
+rose = '\U0001f339'
+cake = '\U0001f370'
+lollipop = '\U0001f36d'
+soft_ice_cream = '\U0001f366'
+four_leaf_clover = '\U0001f340'
+glowing_star = '\U0001f31f'
+eggplant = '\U0001f346'
+
+ascii_symbol_list = [
+    watermelon,
+    rose,
+    cake,
+    lollipop,
+    soft_ice_cream,
+    four_leaf_clover,
+    glowing_star,
+    eggplant
+]
 
 col_labels = ['A','B','C','D']
 row_labels = ['0', '1', '2', '3']
@@ -50,13 +70,23 @@ def clear_terminal():
     """
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def initialize_board(size = 4):
-    board = [
-        [heart, heart, star, star],
-        [music, music, sun, sun],
-        [cloud, cloud, umbrella, umbrella],
-        [soccer_ball,soccer_ball, basketball, basketball]
-    ]
+def initialize_board(size = 4, symbols = None):
+    if symbols == None: 
+        symbols = ascii_symbol_list.copy()
+        print(symbols)
+    duplicates = []
+    board = []
+    row = []
+    for i in range(size):
+        row = []
+        for j in range(size):
+            symbol = random.choice(symbols)
+            row.append(symbol)
+            if symbol in duplicates:
+                symbols.remove(symbol)
+            duplicates.append(symbol)
+        board.append(row)
+        
     return board
 
 board = initialize_board()
