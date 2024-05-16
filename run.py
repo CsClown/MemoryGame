@@ -71,9 +71,12 @@ def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def initialize_board(size = 4, symbols = None):
+    """
+    Initializes the board with random order of symbols
+    with optional custom size and symbols list
+    """
     if symbols == None: 
         symbols = ascii_symbol_list.copy()
-        print(symbols)
     duplicates = []
     board = []
     row = []
@@ -86,7 +89,6 @@ def initialize_board(size = 4, symbols = None):
                 symbols.remove(symbol)
             duplicates.append(symbol)
         board.append(row)
-        
     return board
 
 board = initialize_board()
@@ -98,7 +100,7 @@ def draw_board(board, player, pick1 = None, pick2 = None):
     """
     clear_terminal()
     if (player.name != 'Computer'):
-        print(f"+++ It's your turn, {player.name}! +++")
+        print(f"+++ {player.name} +++")
         print(f"--- Current score: {player.score} ---")
         if player.pairs != []:
             print('Your stash:', end = " ") 
@@ -107,8 +109,8 @@ def draw_board(board, player, pick1 = None, pick2 = None):
                 print(player.pairs[i], end = " ")
             print('\n')
     else: 
-        print("Computer's turn!")
-        print(f"Current score: {player.score}")
+        print("+++ Computer +++")
+        print(f"--- Current score: {player.score} ---")
         if player.pairs != []:
             print('Computers stash:', end = " ")
             for i in range(len(player.pairs)):
@@ -154,9 +156,10 @@ def validate_input(pick):
                 f'Field {pick} is empty '
             )
     except ValueError as e:
-        print('*' * 40)
-        print(f'Invalid data: {e}, please try again\n')
-        print('*' * 40)
+        print('\n')
+        print('--->', end = ' ')
+        print(f'Invalid data: {e}, please try again')
+        print('\n')
         return False
     else: return True
 
@@ -173,12 +176,14 @@ def player_turn(player):
         player.add_score()
         player.add_pair(symbol)
         remove_pair(symbol)
-        print('+++ You got a pair!! +++')
-        print(f"+++ {symbol}{symbol} +++")
+        print(f'+++ You got a pair: {symbol}{symbol} !! +++')
+        
         if player1.score + player2.score < 8:
             print('You get another turn!')
+            print('\n')
         else:
-            print("That was the last two cards! let's check the scores", end= " ")
+            print("That was the last two cards! let's check the scores")
+            print('\n')
             print('.', end = '', flush = True)
             time.sleep(0.2)
             print('.', end = '', flush = True)
@@ -187,11 +192,17 @@ def player_turn(player):
     else: 
         player.active = False
         if player.name == "Computer":
+            print(f'+++ The Computer has no pair! Your turn again, {player1.name}.. +++', flush = True)
+            print('\n')
             player1.active = True
-        else: player2.active = True
-        clear_terminal()
-        print('sorry no pair. its your opponents turn now', flush = True)
+        else: 
+            player2.active = True
+            print("+++ Sorry! No pair :( Computer's turn now +++", flush = True)
+            print('\n')
         time.sleep(1)
+        
+        
+        
     player.pick1 = []
     player.pick2 = []
 
@@ -276,7 +287,6 @@ def check_pair(cards):
     if board[cards[0][1]][cards[0][0]] == board[cards[1][1]][cards[1][0]]:
         return True
     else:
-        print('no pair, sorry')
         return False
 
 def remove_pair(symbol):
