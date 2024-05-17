@@ -117,13 +117,13 @@ def draw_board(board, player, pick1 = None, pick2 = None):
                 print(player.pairs[i], end = " ")
             print('\n')
     print('\n' + '-' * 30 )
-    print(' '* 5 + 'A' + ' ' * 5 + 'B' + ' ' * 5 + 'C' + ' ' * 5 + 'D')
+    print(' '* 4 + 'A' + ' ' * 4 + 'B' + ' ' * 4 + 'C' + ' ' * 4 + 'D')
     for x in range(len(board)):
         print(f'\n\n{x}    ', end = '')
         
         for y in range(len(board[0])):
             if board[x][y] == '0':
-                print('  ', end = '    ')
+                print(' ', end = '    ')
             elif pick1 and pick1 == [y,x]:
                 print(board[x][y], end = '    ')
             elif pick2 and pick2 == [y,x]:
