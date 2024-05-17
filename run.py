@@ -117,7 +117,7 @@ def draw_board(board, player, pick1 = None, pick2 = None):
                 print(player.pairs[i], end = " ")
             print('\n')
     print('\n' + '-' * 30 )
-    print(' '* 4 + 'A' + ' ' * 4 + 'B' + ' ' * 4 + 'C' + ' ' * 4 + 'D')
+    print(' '* 5 + 'A' + ' ' * 4 + 'B' + ' ' * 4 + 'C' + ' ' * 4 + 'D')
     for x in range(len(board)):
         print(f'\n\n{x}    ', end = '')
         
