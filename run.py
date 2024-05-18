@@ -63,7 +63,39 @@ player1 = player('user')
 player2 = player('Computer')
 player2.active = False
 
+def display_instructions():
+    """
+    Display the game instructions
+    """
+    print("""
+        Memory Game Instructions
 
+        **Objective:**
+        The goal of the Concentration game is to find all matching pairs of cards on a 4x4 board in the fewest moves possible.
+
+        **Setup:**
+        1. The game board consists of 16 cards arranged in a 4x4 grid.
+        2. Each card has a matching pair hidden somewhere on the board.
+
+        **How to Play:**
+        1. On your turn, flip over any two cards by selecting their positions on the board (e.g., A1 and B2).
+        2. If the two cards match, they get added to your stash and removed from the board. You get another turn after finding a pair.
+        3. If the cards do not match, they are turned back face down after a brief pause, and then your opponent takes his turn.
+        4. Continue flipping two cards at a time until all pairs are found and matched.
+
+        **Winning the Game:**
+        - The game is won when all pairs of cards have been successfully matched and are face up.
+        - Try to complete the game in as few moves as possible to improve your score.
+
+        **Tips:**
+        - Pay close attention to the positions and values of the cards you flip over.
+        - Use your memory to remember the locations of cards to find pairs more efficiently.""")
+
+    enter = input('\nPress "ENTER" to continue..')
+    if enter == '':
+        pass
+    else: print('Invalid input. Please press "Enter" to continue.')
+    
 def clear_terminal():
     """
     Clears terminal for anti-cheat and overall clarity
@@ -301,7 +333,7 @@ def display_scores():
     pass
 
 def end_of_game():
-    if player1.score + player2.score == 1:
+    if player1.score + player2.score == 8:
         clear_terminal()
         print('\n+++ Game over +++\n')
         if player1.score > player2.score: 
@@ -381,9 +413,8 @@ def main():
     print(f'\nWelcome to this little memory game.')
     player1.name = input('Please tell me your name: ')
     clear_terminal()
-    
-    
-    
+    display_instructions()
+    clear_terminal()
     print(f'\nHello {player1.name}! \u2665 you get the first turn', end = '', flush = True)
     time.sleep(0.7)
     print('.', end = '', flush = True)
