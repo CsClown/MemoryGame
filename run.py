@@ -64,25 +64,48 @@ player1 = player('user')
 player2 = player('Computer')
 player2.active = False
 
+
+def clear_terminal():
+    """
+    Clears terminal for anti-cheat and overall clarity
+    """
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 def display_instructions():
     """
     Display the game instructions
     """
     print("""
-    Memory Game Instructions
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    **Objective:**
+##     ## ######## ##     ##  #######  ########  ##    ## 
+###   ### ##       ###   ### ##     ## ##     ##  ##  ##  
+#### #### ##       #### #### ##     ## ##     ##   ####   
+## ### ## ######   ## ### ## ##     ## ########     ##    
+##     ## ##       ##     ## ##     ## ##   ##      ##    
+##     ## ##       ##     ## ##     ## ##    ##     ##    
+##     ## ######## ##     ##  #######  ##     ##    ##
 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        """)
+
+    enter = input('\nPress "ENTER" to continue..')
+    if enter == '':
+        clear_terminal()
+        pass
+    else: print('Invalid input. Please press "Enter" to continue.')
+    print("""
+    +++ Memory Game Instructions 1/2 +++
+
+                **Objective:**
     The goal of the memory (concentration) game is to find all matching pairs
     of cards on a 4x4 board in the fewest moves possible.
 
-    **Setup:**
-
+                **Setup:**
     1. The game board consists of 16 cards arranged in a 4x4 grid.
     2. Each card has a matching pair hidden somewhere on the board.
 
-    **How to Play:**
-
+                **How to Play:**
     1. On your turn, flip over any two cards by selecting their positions
         on the board (e.g., A1 and B2).
     2. If the two cards match, they get added to your stash and removed
@@ -90,18 +113,22 @@ def display_instructions():
     3. If the cards do not match, they are turned back face down after 
         a brief pause, and then your opponent takes his turn.
     4. Continue flipping two cards at a time until all pairs are found 
-        and matched.
+        and matched.""")
 
-    **Winning the Game:**
+    enter = input('\nPress "ENTER" to continue..')
+    if enter == '':
+        clear_terminal()
+        pass
+    else: print('Invalid input. Please press "Enter" to continue.')
+    print("""
+    +++ Memory Game Instructions 2/2 +++
 
+                **Winning the Game:**
     - The game is won when all pairs of cards have been successfully
         matched, removed from the board and added to the stashes of
         the players
-    - Try to complete the game in as few moves as possible to improve your
-        score.
-
-    **Tips:**
-
+   
+                **Tips:**
     - Pay close attention to the positions and values of the cards you 
         flip over.
     - Use your memory to remember the locations of cards to find pairs
@@ -112,11 +139,6 @@ def display_instructions():
         pass
     else: print('Invalid input. Please press "Enter" to continue.')
     
-def clear_terminal():
-    """
-    Clears terminal for anti-cheat and overall clarity
-    """
-    os.system('cls' if os.name == 'nt' else 'clear')
 
 def initialize_board(size = 4, symbols = None):
     """
@@ -149,22 +171,21 @@ def draw_board(board, player, pick1 = None, pick2 = None):
     clear_terminal()
     if (player.name != 'Computer'):
         print(f"+++ {player.name} +++")
-        print(f"--- Current score: {player.score} ---")
+        print(f"### Current score: {player.score} ###")
         if player.pairs != []:
             print('Your stash:', end = " ") 
             for i in range(len(player.pairs)):
-                print(player.pairs[i], end = " ")
-                print(player.pairs[i], end = " ")
+                print(player.pairs[i]*2, end = " ")
             print('\n')
     else: 
         print("+++ Computer +++")
-        print(f"--- Current score: {player.score} ---")
+        print(f"### Current score: {player.score} ###")
         if player.pairs != []:
             print('Computers stash:', end = " ")
             for i in range(len(player.pairs)):
-                print(player.pairs[i], end = " ")
+                print(player.pairs[i]*2, end = " ")
             print('\n')
-    print('\n' + '-' * 30 )
+    print('\n' + '-' * 25 )
     print(' '* 5 + 'A' + ' ' * 4 + 'B' + ' ' * 4 + 'C' + ' ' * 4 + 'D')
     for x in range(len(board)):
         print(f'\n\n{x}    ', end = '')
@@ -177,7 +198,7 @@ def draw_board(board, player, pick1 = None, pick2 = None):
             elif pick2 and pick2 == [y,x]:
                 print(board[x][y], end = '    ')
             else: print(joker, end = '    ')
-    print('\n' + '-' * 30 )
+    print('\n' + '-' * 25 )
     print('\n')
     
     
@@ -346,12 +367,6 @@ def remove_pair(symbol):
             if board[x][y] == symbol:
                 board[x][y] = '0'
     
-    
-
-
-def display_scores():
-    pass
-
 def end_of_game():
     if player1.score + player2.score == 8:
         clear_terminal()
@@ -426,23 +441,29 @@ def end_of_game():
                 print(f'Invalid Data: {e}! Please try again')
                 
 def name_input():
+    """
+    Validates user input and returns username
+    """
     while True:
         username = input('Please tell me your name: ')
         if not username:
             print('Name cannot be empty. Please try again.')
         elif not re.match("^[A-Za-z][A-Za-z0-9]*$", username):
             print('Name has to start with alphabetic characters and can contain only letters and numbers')
+        elif username == "Computer":
+            print('Name cannot be "Computer". Please try again.')
+        elif len(username) > 20:
+            print('Name cannot be longer than 20 characters. Please try again.')
         else: return username
 
 def main():
-    
-    clear_terminal()
-    print('.' * 10 + 'MEMORY GAME' + '.' * 10)
-    print(f'\nWelcome to this little memory game.')
-    player1.name = name_input()
     clear_terminal()
     display_instructions()
     clear_terminal()
+
+    print(f'\nWelcome to this little memory game.\n')
+    player1.name = name_input()
+
     print(f'\nHello {player1.name}! \u2665 you get the first turn', end = '', flush = True)
     time.sleep(0.7)
     print('.', end = '', flush = True)
@@ -451,9 +472,7 @@ def main():
     time.sleep(0.7)
     print('.', end = '', flush = True)
     time.sleep(0.7)
-    
-    
-    
+
     while not end_of_game():
         active_player = player1 if player1.active else player2
         draw_board(board, active_player)
