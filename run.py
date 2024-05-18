@@ -482,6 +482,7 @@ def main():
 
     #goodbye message by https://patorjk.com/software/taag/#p=display&h=2&f=Banner3&t=Goodbye
     #Inspired by Lucia Ferencik (https://github.com/lucia2007)
+    clear_terminal()
     print("""
  ######    #######   #######  ########  ########  ##    ## ######## 
 ##    ##  ##     ## ##     ## ##     ## ##     ##  ##  ##  ##       

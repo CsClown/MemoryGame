@@ -1,32 +1,308 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Python CLI Memory Game
 
-Welcome,
+Python CLI Memory Game is a Python command line interface (CLI) application which allows the user to play a well-know game of <a href="https://en.wikipedia.org/wiki/Concentration_(card_game)" target="_blank" rel="noopener">"Concentration"</a>.
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
+This game can be played both by adults and children. In fact, the inspiration for replicating this game for my project came from playing this game with my daughters.
 
-## Reminders
+You can play the Python CLI Memory Game here:
+[Python CLI Memory Game](https://python-cli-memory-game-ea3c2c01cc65.herokuapp.com/)
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+[Back to top](#contents)
 
-## Creating the Heroku app
+# Contents
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+- [User Experience (UX)](#user-experience-ux)
+  - [User Stories](#user-stories)
+    - [Goals](#goals)
+    - [Experience](#experience)
+  - [Creation Process](#creation-process)
+    - [Planning](#planning)
+    - [Dependency diagram](#dependency-diagram)
+  - [Design Choices](#design-choices)
+- [Input and validation](#input-and-validation)
+- [Features](#features)
+    - [Game instructions](#game-instructions)
+    - [Username input](#user-name-input)
+    - [Board of cards](#board-of-cards)
+    - [Scores](#scores)
+    - [Game over screen](#game-over-screen)
+    - [Future Features](#future-features)
+- [Technologies Used](#technologies-used)
+- [Python Packages](#python-packages)
+- [Testing](#testing)
+    - [Manual testing](#manual-testing)
+    - [External Testing](#external-testing)
+- [Deployment to Heroku](#deployment-to-heroku)
+  - [Project Deployment](#project-deployment)
+  - [To fork the repository on GitHub](#to-fork-the-repository-on-github)
+  - [To create a local clone of a project](#to-create-a-local-clone-of-a-project)
+- [Credits](#credits)
+  - [Content](#content)
+  - [Media](#media)
+  - [Acknowledgements](#acknowledgements)
 
-1. `heroku/python`
-2. `heroku/nodejs`
+[Back to top](#contents)
+# User Experience (UX)
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+## User Stories
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+### Goals
 
-Connect your GitHub repository and deploy as normal.
+Provide a simple game for children and adults to help them train their memory skills and have a little fun competing against the computer. Python CLI Memory Game has been designed to be straightforward, with minimalist design due to using CLI. The current version is aimed at people who enjoy a quick brain training or have to kill a few minutes.
 
-## Constraints
+### Experience
+  - A user can read the title
+  - A user can find the game rules after the opening screen.
+  - A user can expect a visual feedback for false inputs, scores, game state (board) and results of the match
+  - A user can choose to Play again after they have won, or choose to leave the game.
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
 
----
+[Back to top](#contents)
+## Creation Process
+### Planning
 
-Happy coding!
+Before I started working on the actual application, I created a flow chart (see below) which helped me organize dependencies and provided me with a blueprint to follow when developing the app. 
+
+A challenge was for the content to fit within the restricted size of the window. 
+I used the clear_terminal function to keep the CLI neat and easily readable as well as preventing cheating since it is a memory game after all.
+
+Example of requirements taken into account:
+  - The game will use simple and clear representation of the board of memory cards.
+  - The screen will be cleared periodically, so the user is not overwhelmed or confussed by a large number of print statements.
+  - The opponent is gonna be the computer and its turns should be automated but transparent for the player.
+  - The game will show the scores at each turn and on the game over screen.
+  - The user will have a choice to play again or stop playing the game.
+  
+[Back to top](#contents)
+
+
+### Flow Chart
+
+  This is the original flow chart where I broke the program into managable clear steps. 
+
+  [Dependency Diagram](dependency.drawio.svg)
+
+[Back to top](#contents)
+
+## Design Choices
+
+I tried to keep the game design very simple and easily legible. However, I used ASCII art to make the welcome and good-bye screens a bit more interesting.
+
+[Back to top](#contents)
+
+## Input and validation
+
+A significant part of the code is about the validation of user inputs to make sure the program reacts as intended, the intend of the user is clear and the input valid.
+
+### User name
+The user name is supposed to start with a letter and may contain letters and numbers but cannot be longer than 20 characters:
+
+[username exception handling1](username_handling1)
+[username exception handling2](username_handling2)
+
+### Pick a card
+The input for picking a card has to be validated in many different ways:
+
+[pick_card_exc1](pick_card_exc1.jpg)
+[pick_card_exc1](pick_card_exc1.jpg)
+[pick_card_exc1](pick_card_exc1.jpg)
+[pick_card_exc1](pick_card_exc1.jpg)
+
+
+
+[Back to top](#contents)
+
+
+
+
+# Features
+
+### Game instructions
+After the title is displayed the user will see a brief explanation of how the game works to make sure no questions are unanswered
+
+[Game instructions](game_instructions.jpg)
+
+### User name input
+The first user input is the name of the player
+[User Name Input](username_input.jpg)
+
+### Board of cards
+
+On each turn, the current state of the board is displayed on the screen. Cards that have been removed will not be shown. When a second card is about to be picked, the first card chosen is visible on the board, etc.
+
+[New Board](new_board.jpg)
+[Mid Game Board](mid_game_board.jpg)
+
+### Scores
+Scores are displayed above the board on every turn
+[Player score](player_score.jpg)
+
+[Back to top](#contents)
+
+### Game over screen
+
+After every pair is found on the board the scores are calculated and a winner (or a draw) is announced
+[Game over screen](game_over_screen.jpg)
+
+
+### Goodbye message
+
+When the user chooses to quit, a good bye message is displayed.
+
+![Good-bye message](readme-images/good_bye.png)
+
+[Back to top](#contents)
+### Future Features
+- I would like to let the user choose a difficulty level by giving the choice to increase board size
+
+
+[Back to top](#contents)
+
+# Technologies Used
+- [Github](https://github.com/) - Used for hosting the repository.
+- [Heroku](https://heroku.com/) - Used for deploying the application.
+- [Gitpod](https://www.gitpod.io/#get-started) - Used for developing the application.
+- [Python](https://www.python.org/) - Used for adding functionality to the application.
+- [CI Python Linter](https://pep8ci.herokuapp.com/#) - Used for validation python code.
+- [Lucidcharts](https://lucid.app) - Used for creating the flow chart
+- [Patorjk](https://www.patorjk.com) - Used for creating the ASCII art text
+
+[Back to top](#contents)
+
+# Python Packages
+
+* [OS](https://docs.python.org/3/library/os.html) - Used to clear the screen in the terminal.
+* [Time](https://docs.python.org/3/library/time.html) - Used for setting intentional breaks in the flow.
+* [Random](https://docs.python.org/3/library/random.html) - Used for shuffling the board of cards.
+* [Re](https://docs.python.org/3/library/re.html) - Used for validating username input.
+* [Getpass](https://docs.python.org/3/library/getpass.html) - Used to prevent user input from being displayed on the screen.
+
+# Testing
+
+For testing the application, I used manual testing and external validators. Both manual and external testing are a part of a separate testing [file](/TESTING.md).
+
+### Manual testing
+  - I used manual testing throughout the whole development phase of the project. Mainly:
+    - I frequently checked if all the inputs were valid, namely if my validation functions were catching all errors and exceptions. (Details are in the [Testing file](TESTING.md).)
+    - I played the game repeatedly to see if the correct winning message was displaying when the user finished the game.
+    - I made sure that when the user chose to play again, they would be taken to the choice of a difficulty level and the moves counter was cleared (setting of the initial state).
+    - I checked if a good-bye message displayed after the user chose not to play again.
+
+### External Testing
+  All external testing is a part of a separate testing [file](/TESTING.md).
+
+[Back to top](#contents)
+
+# Deployment to Heroku
+
+## Project Deployment
+
+The application was deployed to Heroku. In order to deploy, the following steps were taken:
+
+1. If you have an account, login to Heroku. Otherwise create a new account.
+2. Once signed in, click the button "New" in the top right corner, below the header and choose "Create new app".
+   <details><summary><b>Create new app</b></summary>
+
+   ![Create new app](/readme-images/create_new_app.png)
+   </details><br />
+
+3. Choose a unique name for the application and select your region. When done, click "Create app".
+   <details><summary><b>Create app</b></summary>
+
+   ![Create app](/readme-images/create_app.png)
+   </details><br />
+
+
+4. This brings you to the "Deploy" tab. From here, click the "Settings" tab and scroll down to the "Config Vars" section and click on "Reveal Config Vars". In the KEY input field, enter "PORT" and in the VALUE input field, enter "8000". After that, click the "Add" button on the right.
+
+   <details><summary><b>Config Vars</b></summary>
+
+   ![Config Vars](/readme-images/config_vars.png)
+   </details><br />
+
+5. Afterwards, scroll down to the "Buildpacks" section of the settings page and click the button "Add buildpack".
+
+   <details><summary><b>Buildpacks</b></summary>
+
+   ![Buildpacks](/readme-images/buildpacks.png)
+   </details><br />
+
+6. First add "Python" package and then "node.js". 
+   
+   <details><summary><b>Choose Buildpacks</b></summary>
+
+   ![Choose Buildpacks](/readme-images/packages_order.png)
+   </details><br />
+
+7. If you exchanged the order of the packages, just drag the Python package above.
+   
+   <details><summary><b>Buildpacks' Order</b></summary>
+   
+   ![Buildpacks's Order](/readme-images/buildpacks_correct_order.png)
+   </details><br />
+
+8. Scroll back to the top of the page and choose the "Deploy" tab. Then choose "GitHub" as Deployment method.
+   
+   <details><summary><b>Deployment method</b></summary>
+   
+   ![Deployment method](/readme-images/deploy.png)
+   </details><br />
+
+9. Go to "Connect to GiHub" section, search for the repository and then click "Connect".
+   
+   <details><summary><b>Connect to GitHub</b></summary>
+   
+   ![Connect to GitHub](/readme-images/connect_repository.png)
+   </details><br />
+
+10. In the "Automatic Deploys" section, choose your preferred method for deployment. At first, I used the manual deployment option, and later I changed it to automatic deploys. Afterwards, click "Deploy Branch".
+   
+    <details><summary><b>Automatic Deploys</b></summary>
+   
+    ![Automatic Deploys](/readme-images/automatic_deploys.png)
+    </details><br />
+
+The link to the the live site can be found here - https://python-cli-memory-game-ea3c2c01cc65.herokuapp.com/.
+The link to the GitHub repository can be found here - https://github.com/CsClown/MemoryGame.
+
+
+[Back to top](#contents)
+
+## To fork the repository on GitHub
+
+A copy of the GitHub Repository can be made by forking the GitHub account. This copy can be viewed and changed without affecting the original repository. Take the following steps to fork the repository:
+
+1. Log in to **GitHub** and locate the [repository](https://github.com/CsClown/MemoryGame).
+2. On the top right hand side of the page is a button called **'Fork'**. Click on the button to create a copy of the original repository in your GitHub Account.
+
+[GitHub forking process image](/readme-images/forking_process.png)
+
+[Back to top](#contents)
+
+## To create a local clone of a project
+
+Take the following steps to create a clone of a project:
+
+1. Click on the **Code** button in the left top corner.
+2. Next to the green **GitPod** button, click on **Code** drop-down menu.
+3. In the **HTTPS** section, click on the clipboard icon to copy the displayed URL.
+4. In your IDE of choice, open **Git Bash**.
+5. Change the current working directory to the location where you want the cloned directory to be made.
+6. Type **git clone**, and then paste the URL copied from GitHub.
+7. Press **enter** and the local clone will be created.
+
+[Github cloning process image](/readme-images/cloning_process.png)
+
+[Back to top](#contents)
+
+
+# Credits
+
+- credit goes to chatGPT which helped me by explaing basic concepts such as clearing the Terminal or letting the program flow idle with time.sleep
+
+
+## Acknowledgements
+- Extra help and guidance was received from my mentor Precious Ijege.
+- I wanna acknowledge myself for having the balls and the perseverance to code the whole thing from scratch without any tutorial or other project to copy from. Kudos.
+
+[Back to top](#contents)
