@@ -261,7 +261,6 @@ def pick_cards(player):
             pick_ls = [string for string in pick_strip]
             if validate_input(pick_strip):
                 player.pick1 = [pick_strip[0].upper(),int(pick_strip[1])]
-                # draw_board(board, player.pick1)
                 print(f'You chose: {player.pick1[0]}{player.pick1[1]}')
                 card1 = [ord(player.pick1[0]) - 65, player.pick1[1]]
                 draw_board(board, player, card1)
@@ -302,13 +301,11 @@ def display_scores():
     pass
 
 def end_of_game():
-    if player1.score + player2.score == 8:
+    if player1.score + player2.score == 1:
         clear_terminal()
-        print('\n')
-        print('+++ Game over +++')
-        print('\n')
+        print('\n+++ Game over +++\n')
         if player1.score > player2.score: 
-            print(f"Congratulations, {player1.name}! \n You won with {player1.score} points")
+            print(f"Congratulations, {player1.name}! \nYou won with {player1.score} points\n")
             print(f"Your pairs: ")
             for i in range(len(player1.pairs)):
                 print(player1.pairs[i], end = " ")
@@ -325,27 +322,57 @@ def end_of_game():
             for i in range(len(player1.pairs)):
                 print(player1.pairs[i], end = " ")
                 print(player1.pairs[i], end = " ")
-            print('\n')
-            print(f"The computers pairs: ")
+            print(f"\nThe computers pairs: ")
             for i in range(len(player2.pairs)):
                 print(player2.pairs[i], end = " ")
                 print(player2.pairs[i], end = " ")
         else:
-            print(f'The Computer has beaten you with {player2.score} to {player1.score} points')
+            print(f'The Computer has beaten you with {player2.score} to {player1.score} points\n')
             print(f"The computers pairs: ")
             for i in range(len(player2.pairs)):
                 print(player2.pairs[i], end = " ")
                 print(player2.pairs[i], end = " ")
-            print(f"Your pairs: ")
+            print(f"\nYour pairs: ")
             for i in range(len(player1.pairs)):
                 print(player1.pairs[i], end = " ")
                 print(player1.pairs[i], end = " ")
             print('\n')
-        print('+' * 40)
         print('\n')
+        print('+'*17)
+        while True:
+            try:
+                choice = input('Do you want to play again? y/n \n')
+                if choice.upper() != 'N' and choice.upper() != 'Y':
+                    raise ValueError(
+                        f'Only "y" or "n" allowed.. you entered "{choice}"'
+                    )
+                elif choice.upper() == 'Y':
+                    global board
+                    board = initialize_board()
+                    player1.score = 0
+                    player1.pairs = []
+                    player1.pick1 = []
+                    player1.pick2 = []
+                    player1.active = True
+                    player2.score = 0
+                    player2.pairs = []
+                    player2.pick1 = []
+                    player2.pick2 = []
+                    player2.active = False
+                    clear_terminal()
+                    print("Let's start a fresh game :)", flush = True)
+                    print("Initializing.", end = '', flush = True)
+                    time.sleep(1)
+                    print('.', end = '', flush = True)
+                    time.sleep(1)
+                    print('.', end = '', flush = True)
+                    return False
 
-        return True
-    else: return False
+                elif choice.upper() == 'N':
+                    return True
+            except ValueError as e:
+                print(f'Invalid Data: {e}! Please try again')
+                
 
 def main():
     
