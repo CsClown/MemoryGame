@@ -1,6 +1,7 @@
 import os
 import time
 import random
+import re
 
 # our card symbols
 # heart = '\u2665'
@@ -68,28 +69,42 @@ def display_instructions():
     Display the game instructions
     """
     print("""
-        Memory Game Instructions
+    Memory Game Instructions
 
-        **Objective:**
-        The goal of the Concentration game is to find all matching pairs of cards on a 4x4 board in the fewest moves possible.
+    **Objective:**
 
-        **Setup:**
-        1. The game board consists of 16 cards arranged in a 4x4 grid.
-        2. Each card has a matching pair hidden somewhere on the board.
+    The goal of the memory (concentration) game is to find all matching pairs
+    of cards on a 4x4 board in the fewest moves possible.
 
-        **How to Play:**
-        1. On your turn, flip over any two cards by selecting their positions on the board (e.g., A1 and B2).
-        2. If the two cards match, they get added to your stash and removed from the board. You get another turn after finding a pair.
-        3. If the cards do not match, they are turned back face down after a brief pause, and then your opponent takes his turn.
-        4. Continue flipping two cards at a time until all pairs are found and matched.
+    **Setup:**
 
-        **Winning the Game:**
-        - The game is won when all pairs of cards have been successfully matched and are face up.
-        - Try to complete the game in as few moves as possible to improve your score.
+    1. The game board consists of 16 cards arranged in a 4x4 grid.
+    2. Each card has a matching pair hidden somewhere on the board.
 
-        **Tips:**
-        - Pay close attention to the positions and values of the cards you flip over.
-        - Use your memory to remember the locations of cards to find pairs more efficiently.""")
+    **How to Play:**
+
+    1. On your turn, flip over any two cards by selecting their positions
+        on the board (e.g., A1 and B2).
+    2. If the two cards match, they get added to your stash and removed
+        from the board. You get another turn after finding a pair.
+    3. If the cards do not match, they are turned back face down after 
+        a brief pause, and then your opponent takes his turn.
+    4. Continue flipping two cards at a time until all pairs are found 
+        and matched.
+
+    **Winning the Game:**
+
+    - The game is won when all pairs of cards have been successfully
+        matched and are face up.
+    - Try to complete the game in as few moves as possible to improve your
+        score.
+
+    **Tips:**
+
+    - Pay close attention to the positions and values of the cards you 
+        flip over.
+    - Use your memory to remember the locations of cards to find pairs
+        more efficiently.""")
 
     enter = input('\nPress "ENTER" to continue..')
     if enter == '':
@@ -208,17 +223,21 @@ def player_turn(player):
         player.add_score()
         player.add_pair(symbol)
         remove_pair(symbol)
-        print(f'+++ You got a pair: {symbol}{symbol} !! +++')
+        if player.name == 'Computer':
+            print(f'+++ The Computer got a pair: {symbol}{symbol} !! +++')
+        else: print(f'+++ You got a pair: {symbol}{symbol} !! +++')
         
         if player1.score + player2.score < 8:
-            print('You get another turn!')
+            if player.name == 'Computer':
+                print('Computer gets another turn!')
+            else: print('You get another turn!')
             print('\n')
         else:
             print("That was the last two cards! let's check the scores")
             print('\n')
             print('.', end = '', flush = True)
             time.sleep(0.2)
-            print('.', end = '', flush = True)
+            print('.', flush = True)
             time.sleep(0.2)
 
     else: 
@@ -405,13 +424,21 @@ def end_of_game():
             except ValueError as e:
                 print(f'Invalid Data: {e}! Please try again')
                 
+def name_input():
+    while True:
+        username = input('Please tell me your name: ')
+        if not username:
+            print('Name cannot be empty. Please try again.')
+        elif not re.match("^[A-Za-z][A-Za-z0-9]*$", username):
+            print('Name has to start with alphabetic characters and can contain only letters and numbers')
+        else: return username
 
 def main():
     
     clear_terminal()
     print('.' * 10 + 'MEMORY GAME' + '.' * 10)
     print(f'\nWelcome to this little memory game.')
-    player1.name = input('Please tell me your name: ')
+    player1.name = name_input()
     clear_terminal()
     display_instructions()
     clear_terminal()
