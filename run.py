@@ -95,7 +95,8 @@ def display_instructions():
     **Winning the Game:**
 
     - The game is won when all pairs of cards have been successfully
-        matched and are face up.
+        matched, removed from the board and added to the stashes of
+        the players
     - Try to complete the game in as few moves as possible to improve your
         score.
 
