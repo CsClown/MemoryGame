@@ -2,6 +2,7 @@ import os
 import time
 import random
 import re
+import getpass
 
 # our card symbols
 # heart = '\u2665'
@@ -89,11 +90,12 @@ def display_instructions():
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         """)
 
-    enter = input('\nPress "ENTER" to continue..')
+    enter = getpass.getpass('\nPress "ENTER" to continue..')
     if enter == '':
         clear_terminal()
-        pass
-    else: print('Invalid input. Please press "Enter" to continue.')
+        
+    
+
     print("""
     +++ Memory Game Instructions 1/2 +++
 
@@ -115,11 +117,10 @@ def display_instructions():
     4. Continue flipping two cards at a time until all pairs are found 
         and matched.""")
 
-    enter = input('\nPress "ENTER" to continue..')
+    enter = getpass.getpass('\nPress "ENTER" to continue..')
     if enter == '':
         clear_terminal()
-        pass
-    else: print('Invalid input. Please press "Enter" to continue.')
+
     print("""
     +++ Memory Game Instructions 2/2 +++
 
@@ -134,10 +135,9 @@ def display_instructions():
     - Use your memory to remember the locations of cards to find pairs
         more efficiently.""")
 
-    enter = input('\nPress "ENTER" to continue..')
+    enter = getpass.getpass('\nPress "ENTER" to continue..')
     if enter == '':
-        pass
-    else: print('Invalid input. Please press "Enter" to continue.')
+        clear_terminal()
     
 
 def initialize_board(size = 4, symbols = None):
@@ -279,10 +279,9 @@ def player_turn(player):
     player.pick1 = []
     player.pick2 = []
 
-    enter = input('Press "ENTER" to continue..')
+    enter = getpass.getpass('Press "ENTER" to continue..')
     if enter == '':
         pass
-    else: print('Invalid input. Please press "Enter" to continue.')
 
 
 def pick_cards(player):
@@ -464,7 +463,7 @@ def main():
     print(f'\nWelcome to this little memory game.\n')
     player1.name = name_input()
 
-    print(f'\nHello {player1.name}! \u2665 you get the first turn', end = '', flush = True)
+    print(f'\nHello {player1.name}! \u2665 You get the first turn', end = '', flush = True)
     time.sleep(0.7)
     print('.', end = '', flush = True)
     time.sleep(0.7)
