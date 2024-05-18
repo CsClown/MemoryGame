@@ -4,16 +4,8 @@ import random
 import re
 import getpass
 
-# our card symbols
-# heart = '\u2665'
-# star = '\u2605'
-# music = '\u266b'
-# sun = '\u2600'
-# cloud = '\u2601'
-# umbrella = '\u2602'
-# soccer_ball = '\u26bd'
-# basketball = '\U0001F3C0'
 
+#ASCII card symbols 
 joker = '\U0001F0CF'
 watermelon = '\U0001f349'
 rose = '\U0001f339'
@@ -35,11 +27,12 @@ ascii_symbol_list = [
     eggplant
 ]
 
+#Generic board layout labels
 col_labels = ['A','B','C','D']
 row_labels = ['0', '1', '2', '3']
 
 
-
+#using a class to create instances for user and computer and managing scores and picking cards
 class player:
     def __init__(self, name):
         self.name = name
@@ -74,7 +67,8 @@ def clear_terminal():
 
 def display_instructions():
     """
-    Display the game instructions
+    Displays the title and the game instructions
+    ASCII Art: https://patorjk.com/software/taag/#p=display&h=2&f=Banner3&t=Memory
     """
     print("""
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -144,6 +138,7 @@ def initialize_board(size = 4, symbols = None):
     """
     Initializes the board with random order of symbols
     with optional custom size and symbols list
+    returns a list of lists (the board)
     """
     if symbols == None: 
         symbols = ascii_symbol_list.copy()
@@ -206,6 +201,7 @@ def draw_board(board, player, pick1 = None, pick2 = None):
 def validate_input(pick):
     """
     validate user input (list)
+    returns Boolean
     """
     try: 
         if len(pick) != 2:
@@ -272,7 +268,7 @@ def player_turn(player):
             player2.active = True
             print("+++ Sorry! No pair :( Computer's turn now +++", flush = True)
             print('\n')
-        time.sleep(1)
+        time.sleep(0.2)
         
         
         
@@ -355,18 +351,29 @@ def pick_cards(player):
     return card1, card2
 
 def check_pair(cards):
+    """
+    Checks if two cards are a pair
+    returns Boolean
+    """
     if board[cards[0][1]][cards[0][0]] == board[cards[1][1]][cards[1][0]]:
         return True
     else:
         return False
 
 def remove_pair(symbol):
+    """ 
+    Removes a pair of discovered cards from the board
+    """
     for x in range(len(board)):
         for y in range(len(board[x])):
             if board[x][y] == symbol:
                 board[x][y] = '0'
     
 def end_of_game():
+    """ 
+    Checks if all pairs are found and displays winner (or draw) and final scores
+    returns Boolean
+    """
     if player1.score + player2.score == 8:
         clear_terminal()
         print('\n+++ Game over +++\n')
@@ -376,8 +383,7 @@ def end_of_game():
             for i in range(len(player1.pairs)):
                 print(player1.pairs[i], end = " ")
                 print(player1.pairs[i], end = " ")
-            print('\n')
-            print(f"The computers pairs: ")
+            print(f"\nThe computers pairs: ")
             for i in range(len(player2.pairs)):
                 print(player2.pairs[i], end = " ")
                 print(player2.pairs[i], end = " ")
@@ -462,24 +468,28 @@ def main():
 
     print(f'\nWelcome to this little memory game.\n')
     player1.name = name_input()
-
-    print(f'\nHello {player1.name}! \u2665 You get the first turn', end = '', flush = True)
-    time.sleep(0.7)
-    print('.', end = '', flush = True)
-    time.sleep(0.7)
-    print('.', end = '', flush = True)
-    time.sleep(0.7)
-    print('.', end = '', flush = True)
-    time.sleep(0.7)
+    clear_terminal()
+    print(f'\nHello {player1.name}! \u2665 You get the first turn!\n', flush = True)
+    time.sleep(0.5)
+    enter = getpass.getpass('Press "ENTER" to continue..')
+    if enter == '':
+        pass
 
     while not end_of_game():
         active_player = player1 if player1.active else player2
         draw_board(board, active_player)
         player_turn(active_player)
-        
-        
-    
-    
-    
 
+    #goodbye message by https://patorjk.com/software/taag/#p=display&h=2&f=Banner3&t=Goodbye
+    #Inspired by Lucia Ferencik (https://github.com/lucia2007)
+    print("""
+ ######    #######   #######  ########  ########  ##    ## ######## 
+##    ##  ##     ## ##     ## ##     ## ##     ##  ##  ##  ##       
+##        ##     ## ##     ## ##     ## ##     ##   ####   ##       
+##   #### ##     ## ##     ## ##     ## ########     ##    ######   
+##    ##  ##     ## ##     ## ##     ## ##     ##    ##    ##       
+##    ##  ##     ## ##     ## ##     ## ##     ##    ##    ##       
+ ######    #######   #######  ########  ########     ##    ########
+ """)
+        
 main()
