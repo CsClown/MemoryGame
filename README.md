@@ -185,13 +185,13 @@ For testing the application, I used manual testing and external validators. More
 
 ### Manual testing
   - I used manual testing throughout the whole development phase of the project. Mainly:
-    - I frequently checked if all the inputs were valid, namely if my validation functions were catching all errors and exceptions. 
+    - I frequently checked if all the inputs were valid, namely if my validation functions were catching all errors and exceptions.
     - I played the game repeatedly to see if the correct winning message was displaying when the user finished the game.
     - I made sure that when the user chose to play again everything except username gets resetted.
     - I checked if a good-bye message displayed after the user chose not to play again.
 
 ### External Testing
-  All external testing is a part of a separate testing [file](/TESTING.md).
+  Please check out [TESTING.md](/TESTING.md).
 
 [Back to top](#contents)
 
