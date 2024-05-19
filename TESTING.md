@@ -2,15 +2,15 @@
 
 ## Code Validation
 
-The [Towers of Hanoi](https://towers-of-hanoi-game.herokuapp.com/) application was thouroughly tested. Python code was reviewed in the [CI Python Linter](https://pep8ci.herokuapp.com/#). As I was continuously correcting warnings and mistakes using pylint in my GitPod, when I ran the code through the CI Python Linter, there was only one warning about an extra line at the end of the file, which I subsequently deleted. Currently, the [run.py file](/run.py) has no errors.
+The [Python CLI Memory Game](https://python-cli-memory-game-ea3c2c01cc65.herokuapp.com/) application was thouroughly tested. Python code was reviewed in the [CI Python Linter](https://pep8ci.herokuapp.com/#). After a couple of hours fixing white spaces and lines that were too long the [run.py file](/run.py) has no errors.
 
-[CI Python Linter No Errors](/readme-images/python_linter_all_clear.png)
+![CI Python Linter No Errors](assets/readme-images/linter.png)
 
 Bugs and warnings encountered during the development process will be described below.
 
 ## Browser Compatibility
 
-The website was tested on the following browsers: Google Chrome, Safari, Microsoft Edge and Mozilla Firefox. There were no errors discovered in the functionality of the CLI application.
+The website was tested on the following browsers: Google Chrome, Microsoft Edge and Mozilla Firefox. Unfortunately Mozilla Firefox cuts the ASCII symbols at two thirds of their width. git 
 
 ## Responsiveness Test
 
