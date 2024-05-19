@@ -223,7 +223,7 @@ def validate_input(pick):
     except ValueError as e:
         print('\n')
         print('--->', end = ' ')
-        print(f'Invalid data: {e}, please try again')
+        print(f'Invalid data: {e},\nplease try again')
         print('\n')
         return False
     else: return True
@@ -454,11 +454,11 @@ def name_input():
         if not username:
             print('Name cannot be empty. Please try again.')
         elif not re.match("^[A-Za-z][A-Za-z0-9]*$", username):
-            print('Name has to start with alphabetic characters and can contain only letters and numbers')
+            print('Name has to start with alphabetic characters\nand can contain only letters and numbers')
         elif username == "Computer":
             print('Name cannot be "Computer". Please try again.')
         elif len(username) > 20:
-            print('Name cannot be longer than 20 characters. Please try again.')
+            print('Name cannot be longer than 20 characters.\nPlease try again.')
         else: return username
 
 def main():
