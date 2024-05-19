@@ -71,7 +71,7 @@ Example of requirements taken into account:
   - The screen will be cleared periodically, so the user is not overwhelmed or confussed by a large number of print statements.
   - The opponent is gonna be the computer and its turns should be automated but transparent for the player.
   - The game will show the scores at each turn and on the game over screen.
-  - The user will have a choice to play again or stop playing the game.
+  - The user will have the choice to play again or stop playing the game.
   
 [Back to top](#contents)
 
@@ -80,7 +80,7 @@ Example of requirements taken into account:
 
   This is the original flow chart where I broke the program into managable clear steps. 
 
-  [Dependency Diagram](dependency.drawio.svg)
+  ![Flowchart](assets/readme-images/flowchart.png)
 
 [Back to top](#contents)
 
@@ -95,61 +95,61 @@ I tried to keep the game design very simple and easily legible. However, I used 
 A significant part of the code is about the validation of user inputs to make sure the program reacts as intended, the intend of the user is clear and the input valid.
 
 ### User name
-The user name is supposed to start with a letter and may contain letters and numbers but cannot be longer than 20 characters:
+The user name is supposed to start with a letter and may contain letters and numbers, cannot be longer than 20 characters and cannot be "Computer"
 
-[username exception handling1](username_handling1)
-[username exception handling2](username_handling2)
+![username exception handling1](assets/readme-images/empty_name.png)
+![username exception handling2](assets/readme-images/computer_name.png)
+![username exception handling2](assets/readme-images/number_name.png)
+![username exception handling2](assets/readme-images/long_name.png)
 
 ### Pick a card
 The input for picking a card has to be validated in many different ways:
 
-[pick_card_exc1](pick_card_exc1.jpg)
-[pick_card_exc1](pick_card_exc1.jpg)
-[pick_card_exc1](pick_card_exc1.jpg)
-[pick_card_exc1](pick_card_exc1.jpg)
-
-
+![pick_card_exc1](assets/readme-images/pick1.png)
+![pick_card_exc1](assets/readme-images/pick2.png)
+![pick_card_exc1](assets/readme-images/pick3.png)
+![pick_card_exc1](assets/readme-images/pick4.png)
+![pick_card_exc1](assets/readme-images/pick5.png)
 
 [Back to top](#contents)
-
-
-
 
 # Features
 
 ### Game instructions
 After the title is displayed the user will see a brief explanation of how the game works to make sure no questions are unanswered
 
-[Game instructions](game_instructions.jpg)
+![Game instructions 1/2](assets/readme-images/instructions_1.png)
+![Game instructions 2/2](assets/readme-images/instructions_2.png)
 
 ### User name input
 The first user input is the name of the player
-[User Name Input](username_input.jpg)
+![User Name Input](assets/readme-images/name_input.png)
 
 ### Board of cards
 
 On each turn, the current state of the board is displayed on the screen. Cards that have been removed will not be shown. When a second card is about to be picked, the first card chosen is visible on the board, etc.
 
-[New Board](new_board.jpg)
-[Mid Game Board](mid_game_board.jpg)
+![New Board](assets/readme-images/fresh_board.png)
+![Mid Game Board](assets/readme-images/mid_game_board.png)
 
 ### Scores
-Scores are displayed above the board on every turn
-[Player score](player_score.jpg)
+Scores are displayed above the board on every turn.
+
+![Player score](assets/readme-images/scores.png)
 
 [Back to top](#contents)
 
 ### Game over screen
 
 After every pair is found on the board the scores are calculated and a winner (or a draw) is announced
-[Game over screen](game_over_screen.jpg)
+![Game over screen](assets/readme-images/game_over.png)
 
 
 ### Goodbye message
 
 When the user chooses to quit, a good bye message is displayed.
 
-![Good-bye message](readme-images/good_bye.png)
+![Goodbye message](assets/readme-images/goodbye.png)
 
 [Back to top](#contents)
 ### Future Features
@@ -179,13 +179,13 @@ When the user chooses to quit, a good bye message is displayed.
 
 # Testing
 
-For testing the application, I used manual testing and external validators. Both manual and external testing are a part of a separate testing [file](/TESTING.md).
+For testing the application, I used manual testing and external validators. External testing are a part of a separate testing [file](/TESTING.md).
 
 ### Manual testing
   - I used manual testing throughout the whole development phase of the project. Mainly:
-    - I frequently checked if all the inputs were valid, namely if my validation functions were catching all errors and exceptions. (Details are in the [Testing file](TESTING.md).)
+    - I frequently checked if all the inputs were valid, namely if my validation functions were catching all errors and exceptions. 
     - I played the game repeatedly to see if the correct winning message was displaying when the user finished the game.
-    - I made sure that when the user chose to play again, they would be taken to the choice of a difficulty level and the moves counter was cleared (setting of the initial state).
+    - I made sure that when the user chose to play again everything except username gets resetted.
     - I checked if a good-bye message displayed after the user chose not to play again.
 
 ### External Testing
@@ -201,67 +201,16 @@ The application was deployed to Heroku. In order to deploy, the following steps 
 
 1. If you have an account, login to Heroku. Otherwise create a new account.
 2. Once signed in, click the button "New" in the top right corner, below the header and choose "Create new app".
-   <details><summary><b>Create new app</b></summary>
-
-   ![Create new app](/readme-images/create_new_app.png)
-   </details><br />
-
 3. Choose a unique name for the application and select your region. When done, click "Create app".
-   <details><summary><b>Create app</b></summary>
-
-   ![Create app](/readme-images/create_app.png)
-   </details><br />
-
-
 4. This brings you to the "Deploy" tab. From here, click the "Settings" tab and scroll down to the "Config Vars" section and click on "Reveal Config Vars". In the KEY input field, enter "PORT" and in the VALUE input field, enter "8000". After that, click the "Add" button on the right.
-
-   <details><summary><b>Config Vars</b></summary>
-
-   ![Config Vars](/readme-images/config_vars.png)
-   </details><br />
-
 5. Afterwards, scroll down to the "Buildpacks" section of the settings page and click the button "Add buildpack".
-
-   <details><summary><b>Buildpacks</b></summary>
-
-   ![Buildpacks](/readme-images/buildpacks.png)
-   </details><br />
-
 6. First add "Python" package and then "node.js". 
-   
-   <details><summary><b>Choose Buildpacks</b></summary>
-
-   ![Choose Buildpacks](/readme-images/packages_order.png)
-   </details><br />
-
 7. If you exchanged the order of the packages, just drag the Python package above.
-   
-   <details><summary><b>Buildpacks' Order</b></summary>
-   
-   ![Buildpacks's Order](/readme-images/buildpacks_correct_order.png)
-   </details><br />
-
 8. Scroll back to the top of the page and choose the "Deploy" tab. Then choose "GitHub" as Deployment method.
-   
-   <details><summary><b>Deployment method</b></summary>
-   
-   ![Deployment method](/readme-images/deploy.png)
-   </details><br />
-
 9. Go to "Connect to GiHub" section, search for the repository and then click "Connect".
-   
-   <details><summary><b>Connect to GitHub</b></summary>
-   
-   ![Connect to GitHub](/readme-images/connect_repository.png)
-   </details><br />
-
 10. In the "Automatic Deploys" section, choose your preferred method for deployment. At first, I used the manual deployment option, and later I changed it to automatic deploys. Afterwards, click "Deploy Branch".
    
-    <details><summary><b>Automatic Deploys</b></summary>
-   
-    ![Automatic Deploys](/readme-images/automatic_deploys.png)
-    </details><br />
-
+    
 The link to the the live site can be found here - https://python-cli-memory-game-ea3c2c01cc65.herokuapp.com/.
 The link to the GitHub repository can be found here - https://github.com/CsClown/MemoryGame.
 
@@ -275,34 +224,17 @@ A copy of the GitHub Repository can be made by forking the GitHub account. This 
 1. Log in to **GitHub** and locate the [repository](https://github.com/CsClown/MemoryGame).
 2. On the top right hand side of the page is a button called **'Fork'**. Click on the button to create a copy of the original repository in your GitHub Account.
 
-[GitHub forking process image](/readme-images/forking_process.png)
-
-[Back to top](#contents)
-
-## To create a local clone of a project
-
-Take the following steps to create a clone of a project:
-
-1. Click on the **Code** button in the left top corner.
-2. Next to the green **GitPod** button, click on **Code** drop-down menu.
-3. In the **HTTPS** section, click on the clipboard icon to copy the displayed URL.
-4. In your IDE of choice, open **Git Bash**.
-5. Change the current working directory to the location where you want the cloned directory to be made.
-6. Type **git clone**, and then paste the URL copied from GitHub.
-7. Press **enter** and the local clone will be created.
-
-[Github cloning process image](/readme-images/cloning_process.png)
-
 [Back to top](#contents)
 
 
 # Credits
 
 - credit goes to chatGPT which helped me by explaing basic concepts such as clearing the Terminal or letting the program flow idle with time.sleep
+- i used the readme.md from [Lucia Ferencik](https://github.com/lucia2007) as jumping off point for my own documentation
 
 
 ## Acknowledgements
 - Extra help and guidance was received from my mentor Precious Ijege.
-- I wanna acknowledge myself for having the balls and the perseverance to code the whole thing from scratch without any tutorial or other project to copy from. Kudos.
+- I wanna acknowledge myself for having the guts and the perseverance to code the whole thing from scratch without any tutorial or other project to copy from. 
 
 [Back to top](#contents)

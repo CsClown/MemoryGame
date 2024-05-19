@@ -4,8 +4,7 @@ import random
 import re
 import getpass
 
-
-#ASCII card symbols 
+# ASCII card symbols
 joker = '\U0001F0CF'
 watermelon = '\U0001f349'
 rose = '\U0001f339'
@@ -27,12 +26,13 @@ ascii_symbol_list = [
     eggplant
 ]
 
-#Generic board layout labels
-col_labels = ['A','B','C','D']
+# Generic board layout labels
+col_labels = ['A', 'B', 'C', 'D']
 row_labels = ['0', '1', '2', '3']
 
 
-#using a class to create instances for user and computer and managing scores and picking cards
+# Using a class to create instances for user and
+# computer and managing scores and picking cards
 class player:
     def __init__(self, name):
         self.name = name
@@ -54,6 +54,7 @@ class player:
     def add_pair(self, pair):
         self.pairs.append(pair)
 
+
 player1 = player('user')
 player2 = player('Computer')
 player2.active = False
@@ -65,10 +66,12 @@ def clear_terminal():
     """
     os.system('cls' if os.name == 'nt' else 'clear')
 
+
 def display_instructions():
     """
     Displays the title and the game instructions
-    ASCII Art: https://patorjk.com/software/taag/#p=display&h=2&f=Banner3&t=Memory
+    ASCII Art:
+    https://patorjk.com/software/taag/#p=display&h=2&f=Banner3&t=Memory
     """
     print("""
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -88,8 +91,6 @@ def display_instructions():
     if enter == '':
         clear_terminal()
         
-    
-
     print("""
     +++ Memory Game Instructions 1/2 +++
 
@@ -156,7 +157,9 @@ def initialize_board(size = 4, symbols = None):
         board.append(row)
     return board
 
+
 board = initialize_board()
+
 
 def draw_board(board, player, pick1 = None, pick2 = None):
     """
@@ -180,8 +183,8 @@ def draw_board(board, player, pick1 = None, pick2 = None):
             for i in range(len(player.pairs)):
                 print(player.pairs[i]*2, end = " ")
             print('\n')
-    print('\n' + '-' * 25 )
-    print(' '* 5 + 'A' + ' ' * 4 + 'B' + ' ' * 4 + 'C' + ' ' * 4 + 'D')
+    print('\n' + '-' * 25)
+    print(' ' * 5 + 'A' + ' ' * 4 + 'B' + ' ' * 4 + 'C' + ' ' * 4 + 'D')
     for x in range(len(board)):
         print(f'\n\n{x}    ', end = '')
         
@@ -192,12 +195,12 @@ def draw_board(board, player, pick1 = None, pick2 = None):
                 print(board[x][y], end = '    ')
             elif pick2 and pick2 == [y,x]:
                 print(board[x][y], end = '    ')
-            else: print(joker, end = '    ')
+            else: 
+                print(joker, end = '    ')
     print('\n' + '-' * 25 )
     print('\n')
     
     
-
 def validate_input(pick):
     """
     validate user input (list)
@@ -226,7 +229,8 @@ def validate_input(pick):
         print(f'Invalid data: {e},\nplease try again')
         print('\n')
         return False
-    else: return True
+    else: 
+        return True
 
 
 
@@ -261,12 +265,12 @@ def player_turn(player):
     else: 
         player.active = False
         if player.name == "Computer":
-            print(f'+++ The Computer has no pair! Your turn again, {player1.name}.. +++', flush = True)
+            print(f'+++ Computer has no pair! Your turn, {player1.name}.. +++')
             print('\n')
             player1.active = True
         else: 
             player2.active = True
-            print("+++ Sorry! No pair :( Computer's turn now +++", flush = True)
+            print("+++ Sorry! No pair :( Computer's turn now +++")
             print('\n')
         time.sleep(0.2)
         
@@ -350,6 +354,7 @@ def pick_cards(player):
                 break
     return card1, card2
 
+
 def check_pair(cards):
     """
     Checks if two cards are a pair
@@ -360,6 +365,7 @@ def check_pair(cards):
     else:
         return False
 
+
 def remove_pair(symbol):
     """ 
     Removes a pair of discovered cards from the board
@@ -368,7 +374,8 @@ def remove_pair(symbol):
         for y in range(len(board[x])):
             if board[x][y] == symbol:
                 board[x][y] = '0'
-    
+
+   
 def end_of_game():
     """ 
     Checks if all pairs are found and displays winner (or draw) and final scores
@@ -444,7 +451,8 @@ def end_of_game():
                     return True
             except ValueError as e:
                 print(f'Invalid Data: {e}! Please try again')
-                
+
+               
 def name_input():
     """
     Validates user input and returns username
@@ -460,6 +468,7 @@ def name_input():
         elif len(username) > 20:
             print('Name cannot be longer than 20 characters.\nPlease try again.')
         else: return username
+
 
 def main():
     clear_terminal()
@@ -480,8 +489,9 @@ def main():
         draw_board(board, active_player)
         player_turn(active_player)
 
-    #goodbye message by https://patorjk.com/software/taag/#p=display&h=2&f=Banner3&t=Goodbye
-    #Inspired by Lucia Ferencik (https://github.com/lucia2007)
+    # goodbye message by 
+    # https://patorjk.com/software/taag/#p=display&h=2&f=Banner3&t=Goodbye
+    # Inspired by Lucia Ferencik (https://github.com/lucia2007)
     clear_terminal()
     print("""
  ######    #######   #######  ########  ########  ##    ## ######## 
