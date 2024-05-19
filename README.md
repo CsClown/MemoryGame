@@ -37,11 +37,8 @@ You can play the Python CLI Memory Game here:
 - [Deployment to Heroku](#deployment-to-heroku)
   - [Project Deployment](#project-deployment)
   - [To fork the repository on GitHub](#to-fork-the-repository-on-github)
-  - [To create a local clone of a project](#to-create-a-local-clone-of-a-project)
 - [Credits](#credits)
-  - [Content](#content)
-  - [Media](#media)
-  - [Acknowledgements](#acknowledgements)
+- [Acknowledgements](#acknowledgements)
 
 [Back to top](#contents)
 # User Experience (UX)
