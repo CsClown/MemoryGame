@@ -226,7 +226,7 @@ def validate_input(pick):
     except ValueError as e:
         print('\n')
         print('--->', end = ' ')
-        print(f'Invalid data: {e},\nplease try again')
+        print(f'Invalid data: {e}\n--->please try again')
         print('\n')
         return False
     else: 
