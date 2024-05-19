@@ -10,28 +10,15 @@ Bugs and warnings encountered during the development process will be described b
 
 ## Browser Compatibility
 
-The website was tested on the following browsers: Google Chrome, Microsoft Edge and Mozilla Firefox. Unfortunately Mozilla Firefox cuts the ASCII symbols at two thirds of their width. git 
+The website was tested on the following browsers: Google Chrome, Microsoft Edge and Mozilla Firefox. Unfortunately Mozilla Firefox cuts the ASCII symbols at two thirds of their width.
 
 ## Responsiveness Test
 
-I did not perform a responsivness test as this CLI application is intended to be used on desktop only. Just for illustration purposes, I am including [Am I Responsive Image](readme-images/amiresponsive.png).
+I did not perform a responsivness test as this CLI application is intended to be used on desktop only. Just for illustration purposes, I am including [Am I Responsive Image](assets/readme-images/responsive.png).
 
 ## Fixed Bugs
 
-| Bug                                                                                | Where            | How                                                                                                     | Commit                                                                                                  |
-|------------------------------------------------------------------------------------|------------------|---------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
-| choose_difficulty() was not returning an integer.                                  | run.py           | I used int() around the returned variable.                                                              | [cd66067](https://github.com/lucia2007/towers-of-hanoi/commit/cd6606731d4da21cfd10e20f487fa75aa53be177) |
-| The disks were not drawn correctly.                                                | run.py           | I had to adjust the linear function used for visualization of the disks.                                | [21316c1](https://github.com/lucia2007/towers-of-hanoi/commit/21316c136c79213bac4c1eaa683efe5d431ccefc) |
-| Missing parameter in move_disk_to().                                               | run.py           | I had to add a parameter to move_disk_to(scr:int).                                                      | [ecba3d0](https://github.com/lucia2007/towers-of-hanoi/commit/ecba3d08f7bf64d73c126f2cd57c2069344818dd) |
-| Function validate_number(height) needed improving.                                 | run.py           | I changed the order of the statements and changed the name of the parameter.                            | [7dd2437](https://github.com/lucia2007/towers-of-hanoi/commit/7dd2437edf72fbf63ed66c63d99e9a5e96d121d7) |
-| move_disk_from() needed a change in the order of statements.                       | run.py           | I included the first print message in the while loop.                                                   | [80e7d9f](https://github.com/lucia2007/towers-of-hanoi/commit/80e7d9f9a260321e6740e1669d2a5c11c288e954) |
-| I was converting a variable to integer in the wrong place.                         | run.py           | I changed the variable to int() when returned.                                                          | [060edc9](https://github.com/lucia2007/towers-of-hanoi/commit/060edc99fa2c11c4017a02b4c50f3971549154d4) |
-| Pyramids were not being printed in the middle of the base.                         | run.py           | I had to add a space in the print().                                                                    | [5edcbba](https://github.com/lucia2007/towers-of-hanoi/commit/5edcbba42d3390ef376543dc5d6bdeb955ddff5b) |
-| I forgot to include COLORAMA in requirements.                                      | requirements.txt | I added "colorama==0.4.6" to the relevant file.                                                         | [d09f13f](https://github.com/lucia2007/towers-of-hanoi/commit/d09f13f18c9ea833ce1bbe40564f3a672d4c183a) |
-| There were warnings regarding the ASCII form of You Won! Some lines were too long. | run.py           | I added "r" to the print statement of the ASCII Art to create raw string and improved print statements. | [36ec779](https://github.com/lucia2007/towers-of-hanoi/commit/36ec7799be58bb8fff5454b2786768de2db2b56a) |
-| I was overwriting variable names in a few places.                                  | run.py           | I had to choose unique names of variables (paramater vs argument).                                      | [13bb8bd](https://github.com/lucia2007/towers-of-hanoi/commit/13bb8bdd1bc33277d3d95764a78eca8bfacdab94) |
-| Moves variable was not being printed out.                                          | run.py           | I had to add "f" to the print statement.                                                                | [706a380](https://github.com/lucia2007/towers-of-hanoi/commit/706a380ca7599e539b98303078503b24c25f2d9e) |
-| The pyramids were not being printed correctly.                                     | run.py           | I had to take out empty space from the print out statements.                                            | [488a982](https://github.com/lucia2007/towers-of-hanoi/commit/488a9824f6ae13dd873640a80503bd1aa8b6583c) |
+
 ## Unfixed Bugs
 
 There are no known bugs in the project.

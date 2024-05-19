@@ -221,12 +221,12 @@ def validate_input(pick):
             )
         elif board[int(pick[1])][ord(pick[0].upper()) - 65] == '0':
             raise ValueError(
-                f'Field {pick} is empty '
+                f'This field is empty! '
             )
     except ValueError as e:
         print('\n')
         print('--->', end=' ')
-        print(f'Invalid data: {e}\n--->please try again')
+        print(f'Invalid data: {e}\n---> please try again')
         print('\n')
         return False
     else:

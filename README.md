@@ -7,6 +7,8 @@ This game can be played both by adults and children. In fact, the inspiration fo
 You can play the Python CLI Memory Game here:
 [Python CLI Memory Game](https://python-cli-memory-game-ea3c2c01cc65.herokuapp.com/)
 
+![Memory Game Responsive](assets/readme-images/responsive.png)
+
 [Back to top](#contents)
 
 # Contents
