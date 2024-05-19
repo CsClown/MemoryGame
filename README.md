@@ -181,7 +181,7 @@ When the user chooses to quit, a good bye message is displayed.
 
 # Testing
 
-For testing the application, I used manual testing and external validators. External testing are a part of a separate testing [file](/TESTING.md).
+For testing the application, I used manual testing and external validators. More detail in the [TESTING.md](/TESTING.md).
 
 ### Manual testing
   - I used manual testing throughout the whole development phase of the project. Mainly:
