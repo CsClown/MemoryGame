@@ -164,7 +164,7 @@ board = initialize_board()
 def draw_board(board, player, pick1=None, pick2=None):
     """
     Draw the board depending on game state
-    with either one, two or no card revealed
+    with either one, two or no cards revealed
     """
     clear_terminal()
     if (player.name != 'Computer'):

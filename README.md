@@ -1,4 +1,4 @@
-# Python CLI Memory Game
+# - Python CLI Memory Game -
 
 Python CLI Memory Game is a Python command line interface (CLI) application which allows the user to play a well-know game of <a href="https://en.wikipedia.org/wiki/Concentration_(card_game)" target="_blank" rel="noopener">"Concentration"</a>.
 
