@@ -138,7 +138,7 @@ def display_instructions():
 def initialize_board(size=4, symbols=None):
     """
     Initializes the board with random order of symbols
-    with optional custom size and symbols list
+    with optional custom size and symbols list (future features)
     returns a list of lists (the board)
     """
     if symbols is None:

@@ -21,7 +21,6 @@ You can play the Python CLI Memory Game here:
     - [Planning](#planning)
     - [Dependency diagram](#dependency-diagram)
   - [Design Choices](#design-choices)
-- [Input and validation](#input-and-validation)
 - [Features](#features)
     - [Game instructions](#game-instructions)
     - [Username input](#user-name-input)
@@ -85,30 +84,7 @@ Example of requirements taken into account:
 
 ## Design Choices
 
-I tried to keep the game design very simple and easily legible. However, I used ASCII art to make the welcome and good-bye screens a bit more interesting.
-
-[Back to top](#contents)
-
-## Input and validation
-
-A significant part of the code is about the validation of user inputs to make sure the program reacts as intended, the intend of the user is clear and the input valid.
-
-### User name
-The user name is supposed to start with a letter and may contain letters and numbers, cannot be longer than 20 characters and cannot be "Computer"
-
-![username exception handling1](assets/readme-images/empty_name.png)
-![username exception handling2](assets/readme-images/computer_name.png)
-![username exception handling2](assets/readme-images/number_name.png)
-![username exception handling2](assets/readme-images/long_name.png)
-
-### Pick a card
-The input for picking a card has to be validated in many different ways:
-
-![pick_card_exc1](assets/readme-images/pick1.png)
-![pick_card_exc1](assets/readme-images/pick2.png)
-![pick_card_exc1](assets/readme-images/pick3.png)
-![pick_card_exc1](assets/readme-images/pick4.png)
-![pick_card_exc1](assets/readme-images/pick5.png)
+Focus lies upon simplicity and accessability but i enjoyed looking for awesome little ASCII symbols to make it a little colorful surprise when you reveal the cards on the board. Playing around with ASCII art text on [Patorjk.com](https://www.patorjk.com) is also advised for every part-time nerd. I used this for the title and the goodbye screen.
 
 [Back to top](#contents)
 
@@ -209,7 +185,6 @@ The application was deployed to Heroku. In order to deploy, the following steps 
 9. Go to "Connect to GiHub" section, search for the repository and then click "Connect".
 10. In the "Automatic Deploys" section, choose your preferred method for deployment. At first, I used the manual deployment option, and later I changed it to automatic deploys. Afterwards, click "Deploy Branch".
    
-    
 The link to the the live site can be found here - https://python-cli-memory-game-ea3c2c01cc65.herokuapp.com/.
 The link to the GitHub repository can be found here - https://github.com/CsClown/MemoryGame.
 
@@ -225,11 +200,25 @@ A copy of the GitHub Repository can be made by forking the GitHub account. This 
 
 [Back to top](#contents)
 
+## To create a local clone of a project
+
+Take the following steps to create a clone of a project:
+
+1. Click on the **Code** button in the left top corner.
+2. Next to the green **GitPod** button, click on **Code** drop-down menu.
+3. In the **HTTPS** section, click on the clipboard icon to copy the displayed URL.
+4. In your IDE of choice, open **Git Bash**.
+5. Change the current working directory to the location where you want the cloned directory to be made.
+6. Type **git clone**, and then paste the URL copied from GitHub.
+7. Press **enter** and the local clone will be created
+
+[Back to top](#contents)
+
 
 # Credits
 
 - credit goes to chatGPT which helped me by explaing basic concepts such as clearing the Terminal or letting the program flow idle with time.sleep
-- i used the readme.md from [Lucia Ferencik](https://github.com/lucia2007) as jumping off point for my own documentation
+- i used the readme.md from [Lucia Ferencik](https://github.com/lucia2007) as jumping off point for my own documentation. I also took the idea of displaying a goodbye ASCII art from her.
 
 
 ## Acknowledgements
